@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--<div id="app">-->
+<!--    &lt;!&ndash;插值表达式，绑定vue中的data数据&ndash;&gt;-->
+<!--    {{message}}-->
+<!--</div>-->
+<!--<div id="app">-->
+<!--    　<h1>Your input is {{ message }}</h1>-->
+<!--    　<input type="text" v-model="message">-->
+<!--</div>-->
+<!--<div id="app">-->
+<!--    　<message content='Hello World'></message>-->
+<!--</div>　-->
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
+<!--<script>-->
+<!--    //1、创建一个vue对象-->
+<!--    new Vue({-->
+<!--        el: '#app',//2、绑定vue作用的范围-->
+<!--        data: {//3、定义页面中显示的模型数据-->
+<!--            message: 'hello vue!'-->
+<!--        }-->
+<!--    })-->
+<!--</script>-->
+<!--<script type="text/javascript">-->
+<!--    var Message = Vue.extend({-->
+<!--        props : ['content'],-->
+<!--        template : '<h1>{{content}}</h1>'-->
+<!--    })-->
+<!--    Vue.component('message', Message);-->
+<!--    var vm = new Vue({-->
+<!--        el : '#app',-->
+<!--    });-->
+<!--</script>-->
+
+<!--<div id="app">-->
+<!--    　<p>{{a}}</p>-->
+<!--    　<p>{{b}}</p>-->
+<!--    　<p>hello vue~</p>-->
+<!--    <span v-once=”name”>{{name | uppercase}}</span>-->
+<!--</div>-->
+
+<div id="app">
+    <!--    <p>&yen;{{price}}</p>-->
+    <!--    <input type="text" v-model="message" number/>-->
+    <!--    <span>Your input is : {{ message }}</span>-->
+    <!--    <div>-->
+    <!--        <label><input type="radio" value="male" v-model="gender ">男</label>-->
+    <!--        <label><input type="radio" value="female" v-model="gender ">女</label>-->
+    <!--        <p>{{ gender }}</p>-->
+    <!--    </div>-->
+
+    <!--    <div>-->
+    <!--        <input type="checkbox" v-model="checked"/>-->
+    <!--        <span>checked : {{ checked }}</span>-->
+    <!--    </div>-->
+
+    <!--    <div>-->
+    <!--        <label><input type="checkbox" value="1" v-model=" multiChecked">1</label>-->
+    <!--        <label><input type="checkbox" value="2" v-model=" multiChecked">2</label>-->
+    <!--        <label><input type="checkbox" value="3" v-model=" multiChecked">3</label>-->
+    <!--        <p>MultiChecked: {{ multiChecked.join('|') }}</p>-->
+    <!--    </div>-->
+
+    <!--    <div>-->
+    <!--        <select v-model="selected">-->
+    <!--            　 <option selected>A</option>-->
+    <!--            　 <option>B</option>-->
+    <!--            　 <option>C</option>-->
+    <!--        </select>-->
+    <!--        <span>Selected: {{ selected }}</span>-->
+    <!--    </div>-->
+    <!--    <br><br><br>-->
+    <!--    <div>-->
+    <!--        <select v-model="multiSelected" multiple>-->
+    <!--            　 <option selected>A</option>-->
+    <!--            　 <option>B</option>-->
+    <!--            　 <option>C</option>-->
+    <!--        </select>-->
+    <!--        <br>-->
+    <!--        <span>MultiSelected: {{ multiSelected.join('|') }}</span>-->
+    <!--    </div>-->
+
+<!--    <ul>-->
+<!--        　-->
+<!--        <li v-for="item in items">-->
+<!--            　　 <h3>{{item.title}}</h3>-->
+<!--            　　 <p>{{item.description}}</p>-->
+<!--            　-->
+<!--        </li>-->
+<!--    </ul>-->
+
+<!--    <div v-on:click="saySelf('click from inner')" v-on:click.self="saySelf('click from self')">-->
+<!--        　<button v-on:click="saySelf('button click')">button1</button>-->
+<!--        　<button v-on:click.stop="saySelf('just button click')">button2</button>-->
+<!--    </div>-->
+
+<!--    <input v-on:keyup.13="submit" v-model="multiChecked"/> &lt;!&ndash; 监听input的输入，当输入回车时触发Submit函数（回车的keycode值为13），用于处理常见的用户输入完直接按回车键提交） &ndash;&gt;-->
+
+    <div class="rect" ref="rect"></div>
+
+</div>
+
+
+<script>
+    // var vm = new Vue({
+    // 　 el : '#app',
+    // 　 data : {
+    // 　　 a : 1
+    // 　 }
+    // });
+    // // vm.$data.b = 2;
+    // vm.$set('b' ,2)
+
+    // var vm = new Vue({
+    //     el : '#app',
+    //     data :{
+    //         name : "vue1"
+    //     },
+    //     init: function() {
+    //         console.log('init');
+    //     },
+    //     created: function() {
+    //         console.log('created');
+    //     },
+    //     beforeCompile: function() {
+    //         console.log('beforeCompile');
+    //     },
+    //     compiled: function() {
+    //         console.log('compiled');
+    //     },
+    //     attached: function() {
+    //         console.log('attached');
+    //     },
+    //     // dettached: function() {
+    //     //     console.log('dettached');
+    //     // },
+    //     beforeDestroy: function() {
+    //         console.log('beforeDestroy');
+    //     },
+    //     destroyed: function() {
+    //         console.log('destroyed');
+    //     },
+    //     ready: function() {
+    //         console.log('ready');
+    //         // 组件完成后调用$destory()函数，进行销毁
+    //         this.$destroy();
+    //     }
+    // });
+    var vm = new Vue({
+        el: '#app',
+        // data: {
+        //     firstName: 'Gavin',
+        //     lastName: 'CLY'
+        // },
+        // computed: {
+        //     fullName: function () {
+        //         // this 指向vm实例
+        //         return this.firstName + ' ' + this.lastName
+        //     }
+        // }
+        // data: {
+        //     cents: 100,
+        // },
+        // computed: {
+        //     price: {
+        //         set: function (newValue) {
+        //             this.cents = newValue * 100;
+        //         },
+        //         get: function () {
+        //             return (this.cents / 100).toFixed(2);
+        //         }
+        //     }
+        // }
+
+        // data: {
+        //     message: '',
+        //     gender: '',
+        //     checked: '',
+        //     multiChecked: [],
+        //     selected: '',
+        //     multiSelected: []
+        // },
+        // data: {
+        //     items: [
+        //         {title: 'title-1', description: 'description-1'},
+        //         {title: 'title-2', description: 'description-2'},
+        //         {title: 'title-3', description: 'description-3'},
+        //         {title: 'title-4', description: 'description-4'}
+        //     ]
+        // }
+        // methods : {
+        //     saySelf(msg) {
+        //         alert(msg);
+        //     },
+        //     submit(msg) {
+        //         console.log(msg)
+        //         console.log(this.multiChecked)
+        //     }
+        // }
+        mounted: function() {
+            Velocity(this.$refs.rect, {
+                backgroundColor: '#0085eb',
+                translateX: 260,
+                rotateZ: '360deg'
+            }, {
+                duration: 1000,
+                easing: [ 0.4, 0.01, 0.165, 0.99 ]
+            });
+        }
+    });
+
+</script>
+</body>
+</html>
