@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+</head>
+<body>
+<div id="app">
+<!--    <my-child parent="This data"></my-child>-->
+    　<input type="text" v-model="message" />
+    　<my-component v-bind:message="message"></my-component>
+</div>
+</body>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.min.js'></script>
+<script>
+    // Vue.component('my-child', {
+    //     props : ['parent'],
+    //     template: '<p>{{ parent }} is from parent'
+    // })
+    // var vm = new Vue({
+    //     el: '#app',
+    //     data: {
+    //         name: 'component'
+    //     }
+    //
+    // });
+
+    var MyComponent = Vue.extend({
+        props : ['message'],
+        template : "<p>{{ 'From parent : ' + message }}</p>"
+    })
+
+    Vue.component('my-component', MyComponent);
+
+    var vm = new Vue({
+        el : '#app',
+        data : {
+            message : 'default'
+        }
+    });
+
+</script>
+</html>

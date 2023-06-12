@@ -3,6 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /*.my-animation-transition {*/
+        /*    animation: increase 1s ease 0s 1;*/
+        /*    width: 100px;*/
+        /*    height: 100px;*/
+        /*    background: black;*/
+        /*}*/
+        /*.my-animation-enter, .my-animation-leave {*/
+        /*    height: 0px;*/
+        /*}*/
+        .box {
+            width: 200px;
+            height: 200px;
+            background: #f30;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+
+        }
+
+        /*@keyframes increase {*/
+        /*    from {height: 0px;}*/
+        /*    to {height: 100px;}*/
+        /*}*/
+    </style>
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -19,6 +45,7 @@
 <!--</div>　-->
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
+
 <!--<script>-->
 <!--    //1、创建一个vue对象-->
 <!--    new Vue({-->
@@ -45,7 +72,6 @@
 <!--    　<p>hello vue~</p>-->
 <!--    <span v-once=”name”>{{name | uppercase}}</span>-->
 <!--</div>-->
-
 <div id="app">
     <!--    <p>&yen;{{price}}</p>-->
     <!--    <input type="text" v-model="message" number/>-->
@@ -87,23 +113,30 @@
     <!--        <span>MultiSelected: {{ multiSelected.join('|') }}</span>-->
     <!--    </div>-->
 
-<!--    <ul>-->
-<!--        　-->
-<!--        <li v-for="item in items">-->
-<!--            　　 <h3>{{item.title}}</h3>-->
-<!--            　　 <p>{{item.description}}</p>-->
-<!--            　-->
-<!--        </li>-->
-<!--    </ul>-->
+    <!--    <ul>-->
+    <!--        　-->
+    <!--        <li v-for="item in items">-->
+    <!--            　　 <h3>{{item.title}}</h3>-->
+    <!--            　　 <p>{{item.description}}</p>-->
+    <!--            　-->
+    <!--        </li>-->
+    <!--    </ul>-->
 
-<!--    <div v-on:click="saySelf('click from inner')" v-on:click.self="saySelf('click from self')">-->
-<!--        　<button v-on:click="saySelf('button click')">button1</button>-->
-<!--        　<button v-on:click.stop="saySelf('just button click')">button2</button>-->
-<!--    </div>-->
+    <!--    <div v-on:click="saySelf('click from inner')" v-on:click.self="saySelf('click from self')">-->
+    <!--        　<button v-on:click="saySelf('button click')">button1</button>-->
+    <!--        　<button v-on:click.stop="saySelf('just button click')">button2</button>-->
+    <!--    </div>-->
 
-<!--    <input v-on:keyup.13="submit" v-model="multiChecked"/> &lt;!&ndash; 监听input的输入，当输入回车时触发Submit函数（回车的keycode值为13），用于处理常见的用户输入完直接按回车键提交） &ndash;&gt;-->
+    <!--    <input v-on:keyup.13="submit" v-model="multiChecked"/> &lt;!&ndash; 监听input的输入，当输入回车时触发Submit函数（回车的keycode值为13），用于处理常见的用户输入完直接按回车键提交） &ndash;&gt;-->
 
-    <div class="rect" ref="rect"></div>
+    <!--    <div v-if="isExist" v-my-directive="param">{{param}}</div>-->
+    <!--    <div v-if="animation" transition="my-animation">animation</div>-->
+    <!--    <div v-if="animateShow" class="animated animate__zoomIn animate__zoomOut" transition="bounce">bounce effect</div>-->
+    <!--    <div v-if="animateShow" class="animated animate__zoomIn animate__zoomOut animate__delay-2s">bounce effect</div>-->
+    <!--    <div v-if="animateShow" class="box animate__animated animate__bounce animate__delay-2s">bounce effect</div>-->
+        <div style="margin-top:20px;background: aqua;height: 200px;align-content: center" class="box animate__animated animate__bounce">测试</div>
+    </transition>
+
 
 </div>
 
@@ -153,66 +186,82 @@
     //         this.$destroy();
     //     }
     // });
+    // var vm = new Vue({
+    //     el: '#app',
+    // data: {
+    //     firstName: 'Gavin',
+    //     lastName: 'CLY'
+    // },
+    // computed: {
+    //     fullName: function () {
+    //         // this 指向vm实例
+    //         return this.firstName + ' ' + this.lastName
+    //     }
+    // }
+    // data: {
+    //     cents: 100,
+    // },
+    // computed: {
+    //     price: {
+    //         set: function (newValue) {
+    //             this.cents = newValue * 100;
+    //         },
+    //         get: function () {
+    //             return (this.cents / 100).toFixed(2);
+    //         }
+    //     }
+    // }
+
+    // data: {
+    //     message: '',
+    //     gender: '',
+    //     checked: '',
+    //     multiChecked: [],
+    //     selected: '',
+    //     multiSelected: []
+    // },
+    // data: {
+    //     items: [
+    //         {title: 'title-1', description: 'description-1'},
+    //         {title: 'title-2', description: 'description-2'},
+    //         {title: 'title-3', description: 'description-3'},
+    //         {title: 'title-4', description: 'description-4'}
+    //     ]
+    // }
+    //     methods : {
+    //         saySelf(msg) {
+    //             alert(msg);
+    //         },
+    //         submit(msg) {
+    //             console.log(msg)
+    //             console.log(this.multiChecked)
+    //         }
+    //     }
+    //
+    // });
+
+    Vue.directive('my-directive', {
+        bind: function () {
+            console.log('bind', arguments);
+        },
+        update: function (newValue, oldValue) {
+            console.log('update', newValue, oldValue)
+        },
+        unbind: function () {
+            console.log('unbind', arguments);
+        }
+    })
+    // Vue.transition('bounce', {
+    //     enterClass: 'animate__zoomIn',
+    //     leaveClass: 'animate__zoomOut'
+    // })
     var vm = new Vue({
         el: '#app',
-        // data: {
-        //     firstName: 'Gavin',
-        //     lastName: 'CLY'
-        // },
-        // computed: {
-        //     fullName: function () {
-        //         // this 指向vm实例
-        //         return this.firstName + ' ' + this.lastName
-        //     }
-        // }
-        // data: {
-        //     cents: 100,
-        // },
-        // computed: {
-        //     price: {
-        //         set: function (newValue) {
-        //             this.cents = newValue * 100;
-        //         },
-        //         get: function () {
-        //             return (this.cents / 100).toFixed(2);
-        //         }
-        //     }
-        // }
-
-        // data: {
-        //     message: '',
-        //     gender: '',
-        //     checked: '',
-        //     multiChecked: [],
-        //     selected: '',
-        //     multiSelected: []
-        // },
-        // data: {
-        //     items: [
-        //         {title: 'title-1', description: 'description-1'},
-        //         {title: 'title-2', description: 'description-2'},
-        //         {title: 'title-3', description: 'description-3'},
-        //         {title: 'title-4', description: 'description-4'}
-        //     ]
-        // }
-        // methods : {
-        //     saySelf(msg) {
-        //         alert(msg);
-        //     },
-        //     submit(msg) {
-        //         console.log(msg)
-        //         console.log(this.multiChecked)
-        //     }
-        // }
-        mounted: function() {
-            Velocity(this.$refs.rect, {
-                backgroundColor: '#0085eb',
-                translateX: 260,
-                rotateZ: '360deg'
-            }, {
-                duration: 1000,
-                easing: [ 0.4, 0.01, 0.165, 0.99 ]
-            });
+        data: {
+            param: 'first',
+            isExist: true,
+            animation: false,
+            animateShow: true
         }
     });
 

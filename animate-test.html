@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+</head>
+<style>
+    /*.my-element {*/
+    /*    display: inline-block;*/
+    /*    margin: 0 0.5rem;*/
+
+    /*    animation: bounce; !* referring directly to the animation's @keyframe declaration *!*/
+    /*    animation-duration: 2s; !* don't forget to set a duration! *!*/
+    /*}*/
+</style>
+<body>
+<div id="app">
+<!--    <button @click="show_component('leftAndRight')">显示和隐藏</button>-->
+<!--    &lt;!&ndash;-->
+<!--    zoomInLeft   从左向右出现同时放大-->
+
+<!--         &ndash;&gt;-->
+<!--    <transition-->
+<!--            enter-active-class="zoomInLeft"-->
+<!--            leave-active-class="zoomOutLeft"-->
+<!--            mode="out-in"-->
+<!--    >-->
+<!--        <component :is="comp" class="animated"></component>-->
+<!--    </transition>-->
+    <h1 class="animate__animated animate__bounce">An animated element</h1>
+
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            message:'你好呀',
+            //   定义组件名称
+            comp:''
+        },
+        //定义两个组件
+        components:{
+            'leftAndRight':{
+                template:'<h1></h1>'
+            },
+
+
+        },
+        methods:{
+            //定义展示方法,参数为组件名称
+            show_component:function (c_name){
+
+                //如果当前组件的名称不等于传入的组件,则展示选择的组件
+                if(this.comp != c_name){
+                    this.comp=c_name;
+                }else{
+                    this.comp='';
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
