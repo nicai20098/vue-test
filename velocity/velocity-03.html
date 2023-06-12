@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            width: 100px; height: 100px;
+            background: black; opacity: 1;
+        }
+        .fade-enter, .fade-leave-active{
+            opacity: 0;
+        }
+        .fade-enter-active, .fade-leave-active{
+            transition: all 3s ease;
+        }
+    </style>
+</head>
+<body>
+<!--<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>-->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.min.js'></script>
+<script src="http://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<div id="app">
+
+    <transition
+            　name="fade" mode="in-out" appear
+            　@before-enter="beforeEnter"
+            　@enter="enter"
+            　@after-enter="afterEnter"
+            　@appear="appear"
+            　@before-leave="beforeLeave"
+            　@leave="leave"
+            　@after-leave="afterLeave"
+    >
+        　<div class="content" v-if="ok">{{ ok }}</div>
+    </transition>
+
+</div>
+
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            // show状态决定方块是显示还是隐藏
+            // velocity: false
+            ok : false
+        },
+        methods : {
+            beforeEnter : function(el) {
+                console.log('beforeEnter', el.className);
+            },
+            enter : function(el) {
+                console.log('enter', el.className);
+            },
+            afterEnter : function(el) {
+                console.log('afterEnter', el.className);
+            },
+            appear : function(el) {
+                console.log('appear', el.className);
+            },
+            beforeLeave : function(el) {
+                console.log('beforeLeave', el.className);
+            },
+            leave : function(el) {
+                console.log('leave', el.className);
+            },
+            afterLeave : function(el) {
+                console.log('afterLeave', el.className);
+            },
+        }
+    });
+</script>
+</body>
+</html>

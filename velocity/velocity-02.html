@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!--    <style>-->
+<!--        .my-velocity-transition {-->
+<!--            　position: absolute; top:0px;-->
+<!--            　width: 100px; height: 100px;-->
+<!--            　background: black;-->
+<!--        }-->
+<!--    </style>-->
+    <style>
+        .rect {
+            width: 50px;
+            height: 50px;
+            background: #4dd0e1;
+        }
+    </style>
+</head>
+<body>
+<!--<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js'></script>-->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/vue/2.5.1/vue.min.js'></script>
+<script src="http://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<div id="app">
+<!--    <div v-if="velocity" transition="my-velocity">sfasdfa</div>-->
+    <transition name="fade" transition='true'
+                @before-enter="handleBeforeEnter"
+                @enter="handleEnter"
+                @after-enter="handleAfterEnter"
+                @before-leave="handleBeforeLeave"
+                @leave="handleLeave"
+                @after-leave="handleAfterLeave"
+    >
+<!--        // 这里的:key='ok'主要用于强制替换元素，展现出in-out/out-in效果-->
+        　<p  class="rect" :key="ok">{{ok}}</p>　
+    </transition>
+</div>
+
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            // show状态决定方块是显示还是隐藏
+            // velocity: false
+            ok : false
+        },
+        methods: {
+            handleClick: function () {
+                this.show = !this.show;
+            },
+            handleBeforeEnter: function (el) {
+                el.style.opacity = 0;
+                console.log('方块显示动画即将执行');
+            },
+            handleEnter: function (el, done) {
+                Velocity(el, 'stop');
+                Velocity(el, {
+                    backgroundColor: '#0085eb',
+                    opacity: 1,
+                    translateX: 260,
+                    rotateZ: ['360deg', 0]
+                }, {
+                    duration: 1000,
+                    easing: [ 0.4, 0.01, 0.165, 0.99 ],
+                    complete: done
+                });
+                console.log('方块显示动画执行中...');
+            },
+            handleAfterEnter: function (el) {
+                console.log('方块显示动画结束');
+            },
+            handleBeforeLeave: function (el) {
+                console.log('方块隐藏动画即将执行');
+            },
+            handleLeave: function (el, done) {
+                Velocity(el, 'stop');
+                Velocity(el, {
+                    backgroundColor: '#4dd0e1',
+                    opacity: 0,
+                    translateX: 0,
+                    rotateZ: [0, '360deg']
+                }, {
+                    duration: 1000,
+                    easing: [ 0.4, 0.01, 0.165, 0.99 ],
+                    complete: done
+                });
+                console.log('方块隐藏动画执行中...');
+            },
+            handleAfterLeave: function (el) {
+                console.log('方块隐藏动画结束');
+            }
+        }
+    });
+    // Vue.transition('my-velocity', {
+    //     css : true,
+    //     enter: function (el, done) {
+    //         Velocity(el, { left : '100px' }, 500, 'swing', done);
+    //     },
+    //     enterCancelled: function (el) {
+    //         Velocity(el, 'stop');
+    //     },
+    //     leave: function (el, done) {
+    //         Velocity(el, { left : '0px' }, 500, 'swing', done);
+    //     },
+    //     leaveCancelled: function (el) {
+    //         Velocity(el, 'stop');
+    //     }
+    // })
+
+
+</script>
+</body>
+</html>
